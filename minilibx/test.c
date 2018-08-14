@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:32:28 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/14 15:03:46 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/14 15:43:15 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,18 @@ int main(int argc, const char *argv[])
 	test->firstclick.x = 0;
 	test->secondclick.y = 0;
 	int bits_per_pixel, size_line, endian;
+	t_vector2d a = {130, 450};
+	t_vector2d b = {387, 280};
+	t_vector2d c = {980, 320};
+	ft_draw_line(addr, window, a, b);
+	ft_draw_line(addr, window, b, c);
+	ft_draw_line(addr, window, c, a);
 	mlx_mouse_hook(window, ft_mousepress, test);
 	mlx_key_hook(window, ft_keypress, addr);
 	mlx_string_put(addr, window, 100, 200, 16711680, "Test test test");
-	fill_pixel(addr, image, 0, 0, 128, 720, 16711680);
-	mlx_put_image_to_window(addr, window, image, 0, 0);
-	mlx_put_image_to_window(addr, window, image2, 50, 0);
+	//fill_pixel(addr, image, 0, 0, 128, 720, 16711680);
+	//mlx_put_image_to_window(addr, window, image, 0, 0);
+	//mlx_put_image_to_window(addr, window, image2, 50, 0);
 	mlx_destroy_image(addr, image);
 	mlx_loop(addr);
 	return 0;
