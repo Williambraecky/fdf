@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:32:28 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/16 18:06:47 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:59:10 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 typedef struct s_vector2d t_vector2d;
 struct s_vector2d
 {
-	int x;
-	int y;
+	float x;
+	float y;
+	float z;
 };
 
 typedef struct s_test	t_test;
@@ -30,6 +31,40 @@ struct s_test
 	t_vector2d firstclick;
 	t_vector2d secondclick;
 };
+
+double ft_toradians(double angle);
+
+t_vector2d ft_rotateY(t_vector2d point, float angle, t_vector2d around)
+{
+	float s;
+	float c;
+	float x;
+	float z;
+
+	s = sin(ft_toradians(angle));
+	c = cos(ft_toradians(angle));
+	x = (point.x - around.x);
+	z = (point.z - around.z);
+	point.x = x * c - z * s + around.x;
+	point.z = z * c + x * s + around.z;
+	return (point);
+}
+
+t_vector2d	ft_rotateX(t_vector2d point, float angle, t_vector2d around)
+{
+	float s;
+	float c;
+	float y;
+	float z;
+
+	s = sin(ft_toradians(angle));
+	c = cos(ft_toradians(angle));
+	y = (point.y - around.y);
+	z = (point.z - around.z);
+	point.y = y * c - z * s + around.y;
+	point.z = z * c - y * s + around.z;
+	return (point);
+}
 
 void ft_draw_line(void *mlx, void *window, t_vector2d first, t_vector2d second)
 {
@@ -50,9 +85,9 @@ void ft_draw_line(void *mlx, void *window, t_vector2d first, t_vector2d second)
 	dy = dy / step;
 	x = (float)first.x;
 	y = (float)first.y;
-	i = 1;
+	i = 0;
 	while(i <= step) {
-		mlx_pixel_put(mlx, window, x, y, 16711680);
+		mlx_pixel_put(mlx, window, round(x), round(y), 16711680);
 		x = x + dx;
 		y = y + dy;
 		i = i + 1;
@@ -78,6 +113,16 @@ t_vector2d ft_rotate_vector(t_vector2d p, float angle, t_vector2d around);
 
 float	angle;
 
+t_vector2d	ft_to2dvector(t_vector2d p, t_vector2d eye)
+{
+	t_vector2d result;
+
+	result.x = (eye.z * (p.x-eye.x)) / (eye.z + p.z) + eye.x;
+	result.y = (eye.z * (p.y-eye.y)) / (eye.z + p.z) + eye.y;
+	result.z = 0;
+	return (result);
+}
+
 int	ft_mousepress(int button, int x, int y, t_test *test)
 {
 	void *addr = test->mlx_ptr;
@@ -85,42 +130,50 @@ int	ft_mousepress(int button, int x, int y, t_test *test)
 	mlx_clear_window(addr, window);
 	int midx = 1280 / 2;
 	int midy = 720 / 2;
-	t_vector2d mid = {midx, midy};
-	t_vector2d a = {midx - 100, midy};
-	t_vector2d b = {midx, midy - 100};
-	t_vector2d c = {midx + 100, midy};
-	t_vector2d d = {midx, midy + 100};
-	angle++;
-	a = ft_rotate_vector(a, angle, mid);
-	b = ft_rotate_vector(b, angle, mid);
-	c = ft_rotate_vector(c, angle, mid);
-	d = ft_rotate_vector(d, angle, mid);
+	t_vector2d eye = {midx, midy, 800};
+	t_vector2d xlow = {0, midy};
+	t_vector2d xhigh = {1280, midy};
+	t_vector2d ylow = {midx, 0};
+	t_vector2d yhigh = {midx, 720};
+	ft_draw_line(addr, window, xlow, xhigh);
+	ft_draw_line(addr, window, ylow, yhigh);
+	t_vector2d mid = {midx, midy, 1000};
+	t_vector2d a = {midx - 200, midy, 1000};
+	t_vector2d b = {midx, midy - 200, 1000};
+	t_vector2d c = {midx + 200, midy, 1000};
+	t_vector2d d = {midx, midy + 200, 1000};
+	angle += button == 4 ? -1 : 1;
+	mlx_pixel_put(addr, window, a.x, a.y, 16711680);
+	a = ft_to2dvector(ft_rotateX(a, angle, mid), eye);
+	b = ft_to2dvector(ft_rotateX(b, angle, mid), eye);
+	c = ft_to2dvector(ft_rotateX(c, angle, mid), eye);
+	d = ft_to2dvector(ft_rotateX(d, angle, mid), eye);
 	ft_draw_line(addr, window, a, b);
 	ft_draw_line(addr, window, b, c);
 	ft_draw_line(addr, window, c, d);
 	ft_draw_line(addr, window, d, a);
 	printf("Click: %d, x:%d, y:%d\n", button, x, y);
 	/*if (button == 2)
-	{
-		mlx_clear_window(test->mlx_ptr, test->window);
-		return 1;
-	}
-	if (test->firstclick.x == 0)
-	{
-		test->firstclick.x = x;
-		test->firstclick.y = y;
-		return 1;
-	}
-	if (test->secondclick.x == 0)
-	{
-		test->secondclick.x = x;
-		test->secondclick.y = y;
-	}
-	printf("test\n");
-	ft_draw_line(test->mlx_ptr,
-			test->window, test->firstclick, test->secondclick);
-	test->firstclick.x = 0;
-	test->secondclick.x = 0;*/
+	  {
+	  mlx_clear_window(test->mlx_ptr, test->window);
+	  return 1;
+	  }
+	  if (test->firstclick.x == 0)
+	  {
+	  test->firstclick.x = x;
+	  test->firstclick.y = y;
+	  return 1;
+	  }
+	  if (test->secondclick.x == 0)
+	  {
+	  test->secondclick.x = x;
+	  test->secondclick.y = y;
+	  }
+	  printf("test\n");
+	  ft_draw_line(test->mlx_ptr,
+	  test->window, test->firstclick, test->secondclick);
+	  test->firstclick.x = 0;
+	  test->secondclick.x = 0;*/
 	return (1);
 }
 
@@ -134,10 +187,7 @@ int	ft_keypress(int key, void *mlx_ptr)
 
 void	ft_pixel_image_put(void *addr, char *image, int x, int y, int size_line)
 {
-	image[y * size_line + x * 4] = 255;
-	image[y * size_line + x * 4 + 1] = 0;
-	image[y * size_line + x * 4 + 2] = 0;
-	image[y * size_line + x * 4 + 3] = 0;
+	*(unsigned int *)(image + y * size_line + x) = 16711680;
 }
 
 void	fill_pixel(void *addr, void *window, int x1, int y1, int x2, int y2, int color)
@@ -171,11 +221,8 @@ t_vector2d ft_rotate_vector(t_vector2d point, float angle, t_vector2d around)
 	float y = (float)(point.y - around.y);
 	t_vector2d result;
 
-	printf("Rotating x:%d y:%d by angle:%f, sin:%f, cos:%f\n", (int)x, (int)y, angle, s, c);
-
 	result.x = round(x * c - y * s + around.x);
 	result.y = round(y * c + x * s + around.y);
-	printf("Result x:%d %f   y:%d %f  \n\n", (int)x, x, (int)y, y);
 	return (result);
 }
 
@@ -214,6 +261,12 @@ int main(int argc, const char *argv[])
 	ft_draw_line(addr, window, b, c);
 	ft_draw_line(addr, window, c, d);
 	ft_draw_line(addr, window, d, a);
+	t_vector2d xlow = {0, midy};
+	t_vector2d xhigh = {1280, midy};
+	t_vector2d ylow = {midx, 0};
+	t_vector2d yhigh = {midx, 720};
+	ft_draw_line(addr, window, xlow, xhigh);
+	ft_draw_line(addr, window, ylow, yhigh);
 	mlx_mouse_hook(window, ft_mousepress, test);
 	mlx_key_hook(window, ft_keypress, addr);
 	mlx_loop(addr);
