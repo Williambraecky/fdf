@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 08:10:53 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/13 16:01:15 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/17 12:16:33 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char		*ft_strtolower(char *str);
 int			ft_strstartswith(const char *str, const char *find);
 char		*ft_strshift(char *str, int shift);
 char		*ft_strrev(char *str);
+size_t		ft_splitlen(char **split);
 
 void		ft_putchar_fd(int c, int fd);
 void		ft_putchar(int c);
