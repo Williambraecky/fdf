@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 17:03:09 by wbraeckm         ###   ########.fr       */
+/*   Created: 2018/08/17 16:53:40 by wbraeckm          #+#    #+#             */
+/*   Updated: 2018/08/17 16:54:28 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	main(int argc, const char *argv[])
+size_t	ft_lstlen(t_list *list)
 {
-	if (argc == 0)
-		ft_exit("Not enough arguments");
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (list && ++len)
+		list = list->next;
+	return (len);
 }

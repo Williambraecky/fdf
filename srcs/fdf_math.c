@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:20:42 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 13:04:18 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/17 17:02:56 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float		ft_toradians(float degree)
 	return (degree * M_PI / 180);
 }
 
-t_vector3d	ft_rotateZ(t_vector3d point, float angle, t_vector3d around)
+t_vector3d	ft_rotatez(t_vector3d point, float angle, t_vector3d around)
 {
 	float s;
 	float c;
@@ -33,7 +33,7 @@ t_vector3d	ft_rotateZ(t_vector3d point, float angle, t_vector3d around)
 	return (point);
 }
 
-t_vector3d ft_rotateY(t_vector3d point, float angle, t_vector3d around)
+t_vector3d	ft_rotatey(t_vector3d point, float angle, t_vector3d around)
 {
 	float s;
 	float c;
@@ -49,7 +49,7 @@ t_vector3d ft_rotateY(t_vector3d point, float angle, t_vector3d around)
 	return (point);
 }
 
-t_vector3d	ft_rotateX(t_vector3d point, float angle, t_vector3d around)
+t_vector3d	ft_rotatex(t_vector3d point, float angle, t_vector3d around)
 {
 	float s;
 	float c;
@@ -69,7 +69,7 @@ t_vector2d	ft_to2dvector(t_vector3d p, t_vector3d eye)
 {
 	t_vector2d result;
 
-	result.x = (eye.z * (p.x-eye.x)) / (eye.z + p.z) + eye.x;
-	result.y = (eye.z * (p.y-eye.y)) / (eye.z + p.z) + eye.y;
+	result.x = (eye.z * (p.x - eye.x)) / (eye.z + p.z) + eye.x;
+	result.y = (eye.z * (p.y - eye.y)) / (eye.z + p.z) + eye.y;
 	return (result);
 }

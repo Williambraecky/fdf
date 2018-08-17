@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 17:03:09 by wbraeckm         ###   ########.fr       */
+/*   Created: 2018/08/17 16:20:51 by wbraeckm          #+#    #+#             */
+/*   Updated: 2018/08/17 16:25:11 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, const char *argv[])
+void	ft_exit(char *message)
 {
-	if (argc == 0)
-		ft_exit("Not enough arguments");
-	return (0);
+	ft_putstr("error: ");
+	ft_putendl(message);
+	exit(0);
 }

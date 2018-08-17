@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 08:10:53 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 12:16:33 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/17 16:54:56 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		ft_lstpushback(t_list **alst, const void *content,
 t_list		*ft_lstlast(t_list **alst);
 void		ft_lstremoveif(t_list **alst, void *data_ref,
 		int (*cmp)());
+size_t		ft_lstlen(t_list *list);
 
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_bzero(void *b, size_t n);
@@ -102,6 +103,7 @@ int			ft_strstartswith(const char *str, const char *find);
 char		*ft_strshift(char *str, int shift);
 char		*ft_strrev(char *str);
 size_t		ft_splitlen(char **split);
+int			ft_strisnumber(char *str);
 
 void		ft_putchar_fd(int c, int fd);
 void		ft_putchar(int c);
