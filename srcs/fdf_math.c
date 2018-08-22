@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:20:42 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 17:02:56 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/22 19:36:50 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_vector3d	ft_rotatex(t_vector3d point, float angle, t_vector3d around)
 	y = (point.y - around.y);
 	z = (point.z - around.z);
 	point.y = y * c - z * s + around.y;
-	point.z = z * c - y * s + around.z;
+	point.z = z * c + y * s + around.z;
 	return (point);
 }
 

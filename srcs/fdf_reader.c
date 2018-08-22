@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:14:19 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 17:02:00 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/22 19:19:52 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_convert_list(t_fdf *fdf, t_list *list)
 		list = list->next;
 		free(tmp->content);
 		free(tmp);
+		i++;
 	}
 }
 
@@ -42,7 +43,7 @@ void	ft_read_split(char **split, t_fdf *fdf, t_list **list)
 	width = ft_splitlen(split);
 	if (fdf->map->width == -1)
 		fdf->map->width = width;
-	if (width == 0 || width != (size_t)fdf->map->width)
+	if (width == 0 || width != fdf->map->width)
 		ft_exit("Invalid file");
 	if (!(line = malloc(sizeof(int) * width)))
 		ft_exit("Could not allocate enough memory");
@@ -52,6 +53,8 @@ void	ft_read_split(char **split, t_fdf *fdf, t_list **list)
 		if (!ft_strisnumber(split[i]))
 			ft_exit("Invalid file");
 		line[i] = ft_atoi(split[i]);
+		fdf->map->maxheight = ft_max(fdf->map->maxheight, line[i]);
+		fdf->map->minheight = ft_min(fdf->map->minheight, line[i]);
 		free(split[i]);
 		i++;
 	}
@@ -79,6 +82,8 @@ void	ft_read_map(int fd, t_fdf *fdf)
 	fdf->map->height = ft_lstlen(list);
 	if (fdf->map->height == 0)
 		ft_exit("Invalid file");
+	fdf->map->offsetx = (float)(fdf->map->width - 1) / 2.0;
+	fdf->map->offsety = (float)(fdf->map->height - 1) / 2.0;
 	ft_convert_list(fdf, list);
 }
 
@@ -93,5 +98,6 @@ t_fdf	*ft_read_file(char *file)
 		ft_exit("Could not allocate enough memory");
 	if (!(fdf->map = ft_new_map()))
 		ft_exit("Could not allocate enough memory");
+	ft_read_map(fd, fdf);
 	return (fdf);
 }

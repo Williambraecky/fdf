@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strisnumber.c                                   :+:      :+:    :+:   */
+/*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/17 16:46:35 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 18:47:23 by wbraeckm         ###   ########.fr       */
+/*   Created: 2018/08/22 16:25:32 by wbraeckm          #+#    #+#             */
+/*   Updated: 2018/08/22 18:27:13 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-int	ft_strisnumber(char *str)
+t_vector2d	ft_asvector2d(float x, float y)
 {
-	if (*str == '-' && *(str + 1) != '\0')
-		str++;
-	while (*str)
-		if (!ft_isdigit(*str++))
-			return (0);
-	return (1);
+	t_vector2d res;
+
+	res.x = x;
+	res.y = y;
+	return (res);
+}
+
+t_vector3d	ft_asvector3d(float x, float y, float z)
+{
+	t_vector3d res;
+
+	res.x = x;
+	res.y = y;
+	res.z = z;
+	return (res);
 }
