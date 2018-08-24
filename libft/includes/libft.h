@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 08:10:53 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 16:54:56 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:44:43 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ struct		s_list
 };
 
 void		*ft_arg_at(va_list list, size_t pos);
+
+float		ft_ilerp(float start, float end, float target);
+float		ft_lerp(float start, float end, float percent);
 
 t_list		*ft_lstnew(const void *content, size_t content_size);
 void		ft_lstdelone(t_list **alst, void (*del)(void *, size_t));

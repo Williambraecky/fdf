@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:06:02 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:24:00 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_handle_rgb_press(int button, int x, int y, t_fdf *fdf)
 
 int		ft_handle_mousepress(int button, int x, int y, t_fdf *fdf)
 {
-	(void)fdf;
 	printf("Pressed: %d at x: %d y: %d\n", button, x, y);
 	ft_handle_r_press(button, x, y, fdf);
 	ft_handle_rgb_press(button, x, y, fdf);
@@ -57,16 +56,14 @@ int		ft_handle_mousepress(int button, int x, int y, t_fdf *fdf)
 
 int		ft_handle_keypress(int key, t_fdf *fdf)
 {
-	(void)fdf;
-	printf("Pressed key:%d\n", key);
 	if (key == ESC_KEY)
 		exit(0);
 	else if (key == M_KEY)
 		fdf->menu->enabled ^= 1;
 	else if (key == LEFT_KEY)
-		fdf->map->y_rot -= 5;
-	else if (key == RIGHT_KEY)
 		fdf->map->y_rot += 5;
+	else if (key == RIGHT_KEY)
+		fdf->map->y_rot -= 5;
 	else if (key == UP_KEY)
 		fdf->map->x_rot += 5;
 	else if (key == DOWN_KEY)

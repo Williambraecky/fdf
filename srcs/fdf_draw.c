@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:03:58 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 14:14:35 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:31:51 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	ft_img_put_pixel(t_image *image, int x, int y, int color)
 	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
 		return ;
 	*(int *)(image->data + (y * image->width + x) * image->bpp) = color;
+}
+
+void	ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
+		int color)
+{
+	ft_draw_line(image, start, ft_asvector2d(end.x, start.y), color);
+	ft_draw_line(image, start, ft_asvector2d(start.x, end.y), color);
+	ft_draw_line(image, ft_asvector2d(start.x, end.y), end, color);
+	ft_draw_line(image, ft_asvector2d(end.x, start.y), end, color);
 }
 
 void	ft_draw_square(t_image *image, t_vector2d start, t_vector2d end,
@@ -47,6 +56,11 @@ void	ft_draw_line(t_image *image, t_vector2d first, t_vector2d second,
 	float	step;
 	int		i;
 
+	if ((first.x < 0 && second.x < 0) ||
+			(first.x >= image->width && second.x >= image->width) ||
+		(first.y < 0 && second.y < 0) ||
+			(first.y >= image->height && second.y >= image->height))
+		return ;
 	dx = (second.x - first.x);
 	dy = (second.y - first.y);
 	if (fabsf(dx) >= fabsf(dy))
@@ -56,10 +70,10 @@ void	ft_draw_line(t_image *image, t_vector2d first, t_vector2d second,
 	dx = dx / step;
 	dy = dy / step;
 	i = 0;
-	while (i <= step) {
+	while (i++ <= step)
+	{
 		ft_img_put_pixel(image, round(first.x), round(first.y), color);
 		first.x += dx;
 		first.y += dy;
-		i++;
 	}
 }

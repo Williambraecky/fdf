@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 19:19:24 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:32:42 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define MENU_WIDTH 300
+# define MENU_WIDTH 400
 # define MENU_COLOR 0x25292E
 # define TEXT_COLOR 0x52B7BA
 # define BORDER_COLOR 0xC8C9CB
@@ -76,6 +76,24 @@ struct			s_map
 	float		y_rot;
 };
 
+typedef struct s_color	t_color;
+struct			s_color
+{
+	int			r;
+	int			g;
+	int			b;
+};
+
+typedef struct s_menu	t_menu;
+struct			s_menu
+{
+	int			enabled;
+	int			red;
+	t_color		start_color;
+	t_color		end_color;
+	t_image		*img;
+};
+
 typedef struct s_fdf	t_fdf;
 struct			s_fdf
 {
@@ -83,7 +101,7 @@ struct			s_fdf
 	void		*win_ptr;
 	t_map		*map;
 	int			menu_enabled;
-	t_image		*menu;
+	t_menu		*menu;
 };
 
 /*
@@ -117,6 +135,7 @@ t_fdf			*ft_new_fdf(void);
 t_map			*ft_new_map(void);
 t_image			*ft_new_image(t_fdf *fdf, int width, int height);
 void			ft_destroy_image(t_fdf *fdf, t_image *image);
+t_menu			*ft_new_menu(t_fdf *fdf);
 t_vector2d		ft_asvector2d(float x, float y);
 t_vector3d		ft_asvector3d(float x, float y, float z);
 
@@ -142,5 +161,26 @@ void			ft_draw_square(t_image *image, t_vector2d start, t_vector2d end,
 		int color);
 void			ft_draw_line(t_image *image, t_vector2d first,
 		t_vector2d second, int color);
+void			ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
+		int color);
+
+/*
+** Color
+*/
+
+int				ft_rgb_to_int(int r, int g, int b);
+int				ft_color_to_int(t_color color);
+t_color			ft_rgb_to_color(int r, int g, int b);
+t_color			ft_int_to_color(int rgb);
+
+/*
+** Menu
+*/
+
+void			ft_init_menu(t_fdf *fdf);
+void			ft_put_rgb_selector(t_menu *menu);
+void			ft_put_menu(t_fdf *fdf, t_menu *menu);
+void			ft_put_rgb_target(t_menu *menu);
+t_color			ft_color_lerp(t_color start, t_color end, float percent);
 
 #endif

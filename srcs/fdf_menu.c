@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 15:20:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:07:49 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:39:17 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void	ft_init_menu(t_fdf *fdf)
 			ft_asvector2d(MENU_WIDTH, WIN_HEIGHT), MENU_COLOR);
 	ft_draw_square(fdf->menu->img, ft_asvector2d(MENU_WIDTH - 3, 0),
 			ft_asvector2d(MENU_WIDTH, WIN_HEIGHT), BORDER_COLOR);
+	ft_draw_edges(fdf->menu->img, ft_asvector2d(24, 618),
+			ft_asvector2d(281, 875), BORDER_COLOR);
+	ft_draw_edges(fdf->menu->img, ft_asvector2d(300, 618),
+			ft_asvector2d(326, 875), BORDER_COLOR);
+	ft_draw_edges(fdf->menu->img, ft_asvector2d(24, 568),
+			ft_asvector2d(326, 594), BORDER_COLOR);
 	ft_put_rgb_selector(fdf->menu);
 	ft_put_rgb_target(fdf->menu);
 	ft_put_menu(fdf, fdf->menu);
