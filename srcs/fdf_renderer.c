@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 21:45:11 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 15:49:40 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_delpoints(t_map *map)
 	map->points = NULL;
 }
 
-void	ft_draw_map(t_map *map)
+void	ft_draw_map(t_map *map, t_menu *menu)
 {
 	t_vector2d	current;
 	int			y;
@@ -67,10 +67,14 @@ void	ft_draw_map(t_map *map)
 			current = ft_asvector2d(map->points[y][x].x, map->points[y][x].y);
 			if (x < (map->width - 1))
 				ft_draw_line(map->image, current,
-						ft_asvector2d(map->points[y][x + 1].x, map->points[y][x + 1].y), 16711680);
+						ft_asvector2d(map->points[y][x + 1].x,
+							map->points[y][x + 1].y),
+						ft_color_to_int(menu->start_color));
 			if (y < (map->height - 1))
 				ft_draw_line(map->image, current,
-						ft_asvector2d(map->points[y + 1][x].x, map->points[y + 1][x].y), 16711680);
+						ft_asvector2d(map->points[y + 1][x].x,
+							map->points[y + 1][x].y),
+						ft_color_to_int(menu->start_color));
 			x++;
 		}
 		y++;
@@ -82,19 +86,18 @@ void	ft_render(t_fdf *fdf)
 	if (fdf->map->image != NULL)
 		ft_destroy_image(fdf, fdf->map->image);
 	fdf->map->image = ft_new_image(fdf,
-			fdf->menu_enabled ? WIN_WIDTH - MENU_WIDTH : WIN_WIDTH, WIN_HEIGHT);
+			fdf->menu->enabled ? WIN_WIDTH - MENU_WIDTH : WIN_WIDTH, WIN_HEIGHT);
 	fdf->map->rotating = ft_asvector3d(fdf->map->image->width / 2,
 			fdf->map->image->height / 2,
 			1000 + (fdf->map->maxheight - fdf->map->minheight) * fdf->map->heightmult * fdf->map->zoom / 2);
 	fdf->map->eye = ft_asvector3d(fdf->map->image->width / 2,
 			fdf->map->image->height / 2,
-			800);
+			-800);
 	ft_genpoint(fdf->map);
-	ft_draw_map(fdf->map);
+	ft_draw_map(fdf->map, fdf->menu);
 	ft_delpoints(fdf->map);
-	if (fdf->menu_enabled)
-		mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->menu->img_ptr,
-				0, 0);
+	if (fdf->menu->enabled)
+		ft_put_menu(fdf, fdf->menu);
 	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr,
-			fdf->map->image->img_ptr, fdf->menu_enabled ? MENU_WIDTH : 0, 0);
+			fdf->map->image->img_ptr, fdf->menu->enabled ? MENU_WIDTH : 0, 0);
 }

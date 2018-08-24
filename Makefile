@@ -6,7 +6,7 @@
 #    By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:04:36 by wbraeckm          #+#    #+#              #
-#    Updated: 2018/08/22 15:53:12 by wbraeckm         ###   ########.fr        #
+#    Updated: 2018/08/24 14:06:01 by wbraeckm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,16 @@ clean:
 fclean: clean
 	/bin/rm -f $(NAME)
 
-re: fclean all
+re: re-lib re-mlx fclean all
 
 norm:
 	@norminette srcs/ includes/
+
+re-mlx:
+	@make re -C minilibx/
+
+re-lib:
+	@make re -C libft/
 
 mlx:
 	@make -C minilibx/

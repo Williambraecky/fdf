@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 18:55:18 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 15:32:08 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@ static void	ft_init_listeners(t_fdf *fdf)
 {
 	mlx_key_hook(fdf->win_ptr, ft_handle_keypress, fdf);
 	mlx_mouse_hook(fdf->win_ptr, ft_handle_mousepress, fdf);
-}
-
-static void	ft_init_menu(t_fdf *fdf)
-{
-	if (!(fdf->menu = ft_new_image(fdf, MENU_WIDTH, WIN_HEIGHT)))
-		ft_exit("Could not allocate enough memory");
-	ft_draw_square(fdf->menu, ft_asvector2d(0, 0),
-			ft_asvector2d(MENU_WIDTH, WIN_HEIGHT), MENU_COLOR);
-	ft_draw_square(fdf->menu, ft_asvector2d(MENU_WIDTH - 3, 0),
-			ft_asvector2d(MENU_WIDTH, WIN_HEIGHT), BORDER_COLOR);
-	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr,
-			fdf->menu->img_ptr, 0, 0);
 }
 
 int			main(int argc, char *argv[])
