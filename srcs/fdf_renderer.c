@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 19:42:35 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/22 21:45:11 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	ft_draw_map(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			current = ft_to2dvector(map->points[y][x], map->eye);
+			current = ft_asvector2d(map->points[y][x].x, map->points[y][x].y);
 			if (x < (map->width - 1))
 				ft_draw_line(map->image, current,
-						ft_to2dvector(map->points[y][x + 1], map->eye), 16711680);
+						ft_asvector2d(map->points[y][x + 1].x, map->points[y][x + 1].y), 16711680);
 			if (y < (map->height - 1))
 				ft_draw_line(map->image, current,
-						ft_to2dvector(map->points[y + 1][x], map->eye), 16711680);
+						ft_asvector2d(map->points[y + 1][x].x, map->points[y + 1][x].y), 16711680);
 			x++;
 		}
 		y++;
