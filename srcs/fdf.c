@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 15:32:08 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:58:20 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_init_listeners(t_fdf *fdf)
 {
 	mlx_key_hook(fdf->win_ptr, ft_handle_keypress, fdf);
 	mlx_mouse_hook(fdf->win_ptr, ft_handle_mousepress, fdf);
+	mlx_hook(fdf->win_ptr, MOTIONNOTIFY, BUTTON1MASK,
+			ft_handle_button_movement, fdf);
 }
 
 int			main(int argc, char *argv[])

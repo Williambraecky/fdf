@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:32:42 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:54:33 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ t_fdf			*ft_read_file(char *file);
 
 int				ft_handle_keypress(int key, t_fdf *fdf);
 int				ft_handle_mousepress(int button, int x, int y, t_fdf *fdf);
+int				ft_handle_button_movement(int x, int y, t_fdf *fdf);
 
 /*
 ** Drawing

@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:24:00 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/24 16:55:45 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	ft_handle_rgb_press(int button, int x, int y, t_fdf *fdf)
 		return ;
 	ft_put_rgb_target(fdf->menu);
 	ft_render(fdf);
+}
+
+int		ft_handle_button_movement(int x, int y, t_fdf *fdf)
+{
+	ft_handle_r_press(1, x, y, fdf);
+	ft_handle_rgb_press(1, x, y, fdf);
+	return (1);
 }
 
 int		ft_handle_mousepress(int button, int x, int y, t_fdf *fdf)
