@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 12:38:03 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:27:02 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define TEXT_COLOR 0x52B7BA
 # define BORDER_COLOR 0xC8C9CB
 # define TRANSPARENT -16777216
+# define COLOR_RED 0xFF0000
 
 typedef struct s_color	t_color;
 struct			s_color

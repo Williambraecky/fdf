@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 15:29:42 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:27:14 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_map	*ft_new_map(void)
 
 	if (!(map = malloc(sizeof(t_map))))
 		return (NULL);
+	map->points = NULL;
 	map->image = NULL;
 	map->maxheight = 0;
 	map->heightmult = 1;

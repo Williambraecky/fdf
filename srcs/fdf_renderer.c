@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 12:09:10 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:25:36 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ void	ft_genpoint(t_map *map, t_menu *menu)
 	int	y;
 	int	x;
 
-	if (!(map->points = malloc(sizeof(t_vector3d *) * map->height)))
-		ft_exit("Could not allocate enough memory");
 	y = 0;
 	while (y < map->height)
 	{
 		x = 0;
-		if (!(map->points[y] = malloc(sizeof(t_vector3d) * map->width)))
-			ft_exit("Could not allocate enough memory");
 		while (x < map->width)
 		{
 			map->points[y][x] = ft_asvector3d(
@@ -47,15 +43,16 @@ void	ft_genpoint(t_map *map, t_menu *menu)
 	}
 }
 
-void	ft_delpoints(t_map *map)
+void	ft_allocpoints(t_map *map)
 {
-	int	y;
+	int y;
 
-	y = map->height;
-	while (y--)
-		free(map->points[y]);
-	free(map->points);
-	map->points = NULL;
+	if (!(map->points = malloc(sizeof(t_vector3d *) * map->height)))
+		ft_exit("Could not allocate enough memory");
+	y = 0;
+	while (y < map->height)
+		if (!(map->points[y++] = malloc(sizeof(t_vector3d) * map->width)))
+			ft_exit("Could not allocate enough memory");
 }
 
 void	ft_draw_map(t_map *map)
@@ -97,9 +94,10 @@ void	ft_render(t_fdf *fdf)
 	fdf->map->eye = ft_asvector3d(fdf->map->image->width / 2,
 			fdf->map->image->height / 2,
 			-800);
+	if (fdf->map->points == NULL)
+		ft_allocpoints(fdf->map);
 	ft_genpoint(fdf->map, fdf->menu);
 	ft_draw_map(fdf->map);
-	ft_delpoints(fdf->map);
 	if (fdf->menu->enabled)
 		ft_put_menu(fdf, fdf->menu);
 	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr,
