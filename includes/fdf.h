@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:54:33 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:38:03 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,15 @@
 # define MENU_COLOR 0x25292E
 # define TEXT_COLOR 0x52B7BA
 # define BORDER_COLOR 0xC8C9CB
-# define COLOR_RED 16711680
+# define TRANSPARENT -16777216
+
+typedef struct s_color	t_color;
+struct			s_color
+{
+	int			r;
+	int			g;
+	int			b;
+};
 
 typedef struct s_vector2d	t_vector2d;
 struct			s_vector2d
@@ -42,6 +50,14 @@ struct			s_vector3d
 	float		x;
 	float		y;
 	float		z;
+};
+
+typedef struct t_point	t_point;
+struct			t_point
+{
+	int			height;
+	int			forced_color;
+	t_color		color;
 };
 
 typedef struct s_image	t_image;
@@ -59,7 +75,7 @@ struct			s_image
 typedef struct s_map	t_map;
 struct			s_map
 {
-	int			**data;
+	t_point		**data;
 	t_vector3d	**points;
 	t_image		*image;
 	ssize_t		width;
@@ -76,14 +92,6 @@ struct			s_map
 	float		y_rot;
 };
 
-typedef struct s_color	t_color;
-struct			s_color
-{
-	int			r;
-	int			g;
-	int			b;
-};
-
 typedef struct s_menu	t_menu;
 struct			s_menu
 {
@@ -92,6 +100,18 @@ struct			s_menu
 	t_color		start_color;
 	t_color		end_color;
 	t_image		*img;
+};
+
+typedef struct s_xpm	t_xpm;
+struct			s_xpm
+{
+	void		*xpm_ptr;
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
 };
 
 typedef struct s_fdf	t_fdf;
@@ -125,6 +145,8 @@ t_vector3d		ft_rotatez(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_rotatey(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_rotatex(t_vector3d point, float angle, t_vector3d around);
 t_vector2d		ft_to2dvector(t_vector3d p, t_vector3d eye);
+float			ft_get_anglez(t_vector3d from, t_vector3d to);
+float			ft_get_angley(t_vector3d from, t_vector3d to);
 
 /*
 ** Utilitaries
@@ -144,6 +166,8 @@ t_vector3d		ft_asvector3d(float x, float y, float z);
 */
 
 t_fdf			*ft_read_file(char *file);
+int				ft_point_is_valid(char *str);
+t_point			ft_read_point(char *str);
 
 /*
 ** Listeners
@@ -164,6 +188,8 @@ void			ft_draw_line(t_image *image, t_vector2d first,
 		t_vector2d second, int color);
 void			ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
 		int color);
+void	ft_draw_line_gradient(t_image *image, t_vector3d first, t_vector3d second,
+		t_color start, t_color end);
 
 /*
 ** Color
@@ -173,6 +199,7 @@ int				ft_rgb_to_int(int r, int g, int b);
 int				ft_color_to_int(t_color color);
 t_color			ft_rgb_to_color(int r, int g, int b);
 t_color			ft_int_to_color(int rgb);
+t_color			ft_color_lerp(t_color start, t_color end, float percent);
 
 /*
 ** Menu
@@ -182,6 +209,12 @@ void			ft_init_menu(t_fdf *fdf);
 void			ft_put_rgb_selector(t_menu *menu);
 void			ft_put_menu(t_fdf *fdf, t_menu *menu);
 void			ft_put_rgb_target(t_menu *menu);
-t_color			ft_color_lerp(t_color start, t_color end, float percent);
+
+/*
+** Xpm utils
+*/
+
+void	ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
+		t_vector2d pos);
 
 #endif

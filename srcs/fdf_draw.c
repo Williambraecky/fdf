@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:03:58 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:31:51 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 11:49:34 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,35 @@ void	ft_draw_line(t_image *image, t_vector2d first, t_vector2d second,
 		ft_img_put_pixel(image, round(first.x), round(first.y), color);
 		first.x += dx;
 		first.y += dy;
+	}
+}
+
+void	ft_draw_line_gradient(t_image *image, t_vector3d first, t_vector3d second,
+		t_color start, t_color end)
+{
+	t_vector3d	d;
+	float	step;
+	int		i;
+
+	if ((first.x < 0 && second.x < 0) ||
+			(first.x >= image->width && second.x >= image->width) ||
+		(first.y < 0 && second.y < 0) ||
+			(first.y >= image->height && second.y >= image->height))
+		return ;
+	d.x = (second.x - first.x);
+	d.y = (second.y - first.y);
+	if (fabsf(d.x) >= fabsf(d.y))
+		step = fabsf(d.x);
+	else
+		step = fabsf(d.y);
+	d.x = d.x / step;
+	d.y = d.y / step;
+	i = 0;
+	while (i++ <= step)
+	{
+		ft_img_put_pixel(image, round(first.x), round(first.y),
+				ft_color_to_int(ft_color_lerp(start, end, (float)i/step)));
+		first.x += d.x;
+		first.y += d.y;
 	}
 }

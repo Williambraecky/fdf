@@ -6,12 +6,11 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/25 20:07:10 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:12:43 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static void	ft_init_listeners(t_fdf *fdf)
 {

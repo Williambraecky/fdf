@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:55:45 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:51:07 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_handle_keypress(int key, t_fdf *fdf)
 	else if (key == PL_KEY)
 		fdf->map->zoom += 2;
 	else if (key == MN_KEY)
-		fdf->map->zoom -= 2;
+		fdf->map->zoom = ft_max(1, fdf->map->zoom - 2);
 	else if (key == K9_KEY)
 		fdf->map->heightmult--;
 	else if (key == K0_KEY)

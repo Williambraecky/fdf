@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 15:20:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:39:17 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:49:52 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,9 @@ void	ft_init_menu(t_fdf *fdf)
 			ft_asvector2d(326, 594), BORDER_COLOR);
 	ft_put_rgb_selector(fdf->menu);
 	ft_put_rgb_target(fdf->menu);
+	ft_put_xpm_file_to_image(fdf, "wbraeckm_logo.xpm",
+			fdf->menu->img, ft_asvector2d(25, 25));
+	ft_put_xpm_file_to_image(fdf, "logo19.xpm",
+			fdf->menu->img, ft_asvector2d(135, 140));
 	ft_put_menu(fdf, fdf->menu);
 }

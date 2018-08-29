@@ -6,13 +6,13 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 15:49:40 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:09:10 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_genpoint(t_map *map)
+void	ft_genpoint(t_map *map, t_menu *menu)
 {
 	int	y;
 	int	x;
@@ -30,11 +30,17 @@ void	ft_genpoint(t_map *map)
 			map->points[y][x] = ft_asvector3d(
 					(x - map->offsetx) * map->zoom + map->image->width / 2,
 					(y - map->offsety) * map->zoom + map->image->height / 2,
-					1000 + (map->data[y][x] * map->heightmult * map->zoom));
+					1000 + (map->data[y][x].height * map->heightmult * map->zoom));
 			map->points[y][x] = ft_rotatex(map->points[y][x],
 					map->x_rot, map->rotating);
 			map->points[y][x] = ft_rotatey(map->points[y][x],
 					map->y_rot, map->rotating);
+			if (map->data[y][x].forced_color == 0)
+			{
+				map->data[y][x].color =
+					ft_color_lerp(menu->start_color, menu->end_color,
+							ft_ilerp(map->minheight, map->maxheight, map->data[y][x].height));
+			}
 			x++;
 		}
 		y++;
@@ -52,9 +58,9 @@ void	ft_delpoints(t_map *map)
 	map->points = NULL;
 }
 
-void	ft_draw_map(t_map *map, t_menu *menu)
+void	ft_draw_map(t_map *map)
 {
-	t_vector2d	current;
+	t_vector3d	current;
 	int			y;
 	int			x;
 
@@ -64,17 +70,15 @@ void	ft_draw_map(t_map *map, t_menu *menu)
 		x = 0;
 		while (x < map->width)
 		{
-			current = ft_asvector2d(map->points[y][x].x, map->points[y][x].y);
+			current = map->points[y][x];
 			if (x < (map->width - 1))
-				ft_draw_line(map->image, current,
-						ft_asvector2d(map->points[y][x + 1].x,
-							map->points[y][x + 1].y),
-						ft_color_to_int(menu->start_color));
+				ft_draw_line_gradient(map->image, current,
+						map->points[y][x + 1],
+						map->data[y][x].color, map->data[y][x + 1].color);
 			if (y < (map->height - 1))
-				ft_draw_line(map->image, current,
-						ft_asvector2d(map->points[y + 1][x].x,
-							map->points[y + 1][x].y),
-						ft_color_to_int(menu->start_color));
+				ft_draw_line_gradient(map->image, current,
+						map->points[y + 1][x],
+						map->data[y][x].color, map->data[y + 1][x].color);
 			x++;
 		}
 		y++;
@@ -93,8 +97,8 @@ void	ft_render(t_fdf *fdf)
 	fdf->map->eye = ft_asvector3d(fdf->map->image->width / 2,
 			fdf->map->image->height / 2,
 			-800);
-	ft_genpoint(fdf->map);
-	ft_draw_map(fdf->map, fdf->menu);
+	ft_genpoint(fdf->map, fdf->menu);
+	ft_draw_map(fdf->map);
 	ft_delpoints(fdf->map);
 	if (fdf->menu->enabled)
 		ft_put_menu(fdf, fdf->menu);

@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:14:19 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 19:19:52 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 12:08:29 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_convert_list(t_fdf *fdf, t_list *list)
 	int		i;
 
 	tmp = list;
-	if (!(fdf->map->data = malloc(sizeof(int *) * fdf->map->height)))
+	if (!(fdf->map->data = malloc(sizeof(t_point *) * fdf->map->height)))
 		ft_exit("Could not allocate enough memory");
 	i = 0;
 	while (i < fdf->map->height)
 	{
-		if (!(fdf->map->data[i] = malloc(sizeof(int) * fdf->map->width)))
+		if (!(fdf->map->data[i] = malloc(sizeof(t_point) * fdf->map->width)))
 			ft_exit("Could not allocate enough memory");
 		ft_memcpy(fdf->map->data[i], list->content, list->content_size);
 		tmp = list;
@@ -36,29 +36,29 @@ void	ft_convert_list(t_fdf *fdf, t_list *list)
 
 void	ft_read_split(char **split, t_fdf *fdf, t_list **list)
 {
-	int	*line;
-	int	width;
-	int	i;
+	t_point	*line;
+	int		width;
+	int		i;
 
 	width = ft_splitlen(split);
 	if (fdf->map->width == -1)
 		fdf->map->width = width;
 	if (width == 0 || width != fdf->map->width)
 		ft_exit("Invalid file");
-	if (!(line = malloc(sizeof(int) * width)))
+	if (!(line = malloc(sizeof(t_point) * width)))
 		ft_exit("Could not allocate enough memory");
 	i = 0;
 	while (i < width)
 	{
-		if (!ft_strisnumber(split[i]))
+		if (!ft_point_is_valid(split[i]))
 			ft_exit("Invalid file");
-		line[i] = ft_atoi(split[i]);
-		fdf->map->maxheight = ft_max(fdf->map->maxheight, line[i]);
-		fdf->map->minheight = ft_min(fdf->map->minheight, line[i]);
+		line[i] = ft_read_point(split[i]);
+		fdf->map->maxheight = ft_max(fdf->map->maxheight, line[i].height);
+		fdf->map->minheight = ft_min(fdf->map->minheight, line[i].height);
 		free(split[i]);
 		i++;
 	}
-	ft_lstpushback(list, line, width * 4);
+	ft_lstpushback(list, line, width * sizeof(t_point));
 	free(line);
 }
 

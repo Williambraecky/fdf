@@ -3,7 +3,7 @@ static char *cbr1h_wn8zt_0[] = {
 /* columns rows colors chars-per-pixel */
 "48 48 2 1 ",
 "  c None",
-". c white",
+". c black",
 /* pixels */
 "                                                ",
 "                                                ",

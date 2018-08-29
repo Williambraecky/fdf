@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:25:32 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/22 18:27:13 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/08/29 11:24:43 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ t_vector3d	ft_asvector3d(float x, float y, float z)
 	res.y = y;
 	res.z = z;
 	return (res);
+}
+
+float		ft_get_anglez(t_vector3d from, t_vector3d to)
+{
+	return (atan((to.z - from.z) / (to.x - from.x)));
+}
+
+float		ft_get_angley(t_vector3d from, t_vector3d to)
+{
+	return (atan((to.z - from.z) / (to.x - from.x)));
 }
