@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:17:27 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:42:16 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ void	ft_draw_map(t_map *map)
 			if (x < (map->width - 1))
 				ft_draw_line_gradient(map->image, current,
 						map->points[y][x + 1],
-						map->data[y][x].color, map->data[y][x + 1].color);
+						ft_colors_to_p(map->data[y][x].color,
+							map->data[y][x + 1].color));
 			if (y < (map->height - 1))
 				ft_draw_line_gradient(map->image, current,
 						map->points[y + 1][x],
-						map->data[y][x].color, map->data[y + 1][x].color);
+						ft_colors_to_p(map->data[y][x].color,
+							map->data[y + 1][x].color));
 			x++;
 		}
 		y++;

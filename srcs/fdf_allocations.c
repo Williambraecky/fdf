@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:09:50 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:41:14 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_menu		*ft_new_menu(t_fdf *fdf)
 	if (!(menu = malloc(sizeof(t_menu))))
 		return (NULL);
 	menu->img = ft_new_image(fdf, MENU_WIDTH, WIN_HEIGHT);
-	menu->enabled = 0;
+	menu->enabled = 1;
 	menu->red = 0;
 	menu->start_color = ft_int_to_color(COLOR_WHITE);
 	menu->end_color = ft_int_to_color(COLOR_RED);
@@ -61,7 +61,6 @@ t_fdf		*ft_new_fdf(void)
 		return (NULL);
 	if (!(fdf->controls = ft_new_control()))
 		ft_exit("Could not alloacte enough memory");
-	fdf->menu_enabled = 1;
 	return (fdf);
 }
 

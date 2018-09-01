@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:09:27 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:41:10 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ struct			s_point
 	int			height;
 	int			forced_color;
 	t_color		color;
+};
+
+typedef struct s_col_p	t_col_p;
+struct			s_col_p
+{
+	t_color		start;
+	t_color		end;
 };
 
 typedef struct s_image	t_image;
@@ -135,7 +142,6 @@ struct			s_fdf
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		*map;
-	int			menu_enabled;
 	t_menu		*menu;
 	t_control	*controls;
 };
@@ -206,7 +212,7 @@ void			ft_draw_line(t_image *image, t_vector2d first,
 void			ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
 		int color);
 void			ft_draw_line_gradient(t_image *image, t_vector3d first,
-		t_vector3d second, t_color start, t_color end);
+		t_vector3d second, t_col_p col_p);
 
 /*
 ** Color
@@ -217,6 +223,8 @@ int				ft_color_to_int(t_color color);
 t_color			ft_rgb_to_color(int r, int g, int b);
 t_color			ft_int_to_color(int rgb);
 t_color			ft_color_lerp(t_color start, t_color end, float percent);
+t_col_p			ft_colors_to_p(t_color start, t_color end);
+t_color			ft_col_p_lerp(t_col_p col_p, float percent);
 
 /*
 ** Menu

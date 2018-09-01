@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:03:58 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 16:54:55 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:39:12 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_draw_line(t_image *image, t_vector2d first, t_vector2d second,
 }
 
 void	ft_draw_line_gradient(t_image *image, t_vector3d first,
-		t_vector3d second, t_color start, t_color end)
+		t_vector3d second, t_col_p col_p)
 {
 	t_vector3d	d;
 	float		step;
@@ -102,7 +102,7 @@ void	ft_draw_line_gradient(t_image *image, t_vector3d first,
 	while (i <= step)
 	{
 		ft_img_put_pixel(image, round(first.x), round(first.y),
-				ft_color_to_int(ft_color_lerp(start, end, (float)i++ / step)));
+				ft_color_to_int(ft_col_p_lerp(col_p, (float)i++ / step)));
 		first.x += d.x;
 		first.y += d.y;
 	}
