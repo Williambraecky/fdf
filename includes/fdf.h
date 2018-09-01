@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:41:10 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:47:22 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_point	t_point;
 struct			s_point
 {
 	int			height;
-	int			forced_color;
+	char		forced_color;
 	t_color		color;
 };
 
