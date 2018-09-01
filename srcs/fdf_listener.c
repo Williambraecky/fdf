@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 16:59:18 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 23:34:55 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf)
 	if (!fdf->controls->inside_menu && button == SCROLLDOWN_KEY && ++count)
 		fdf->map->zoom = ft_max(1, fdf->map->zoom - 2);
 	else if (!fdf->controls->inside_menu && button == SCROLLUP_KEY && ++count)
-		fdf->map->zoom += 2;
+		fdf->map->zoom = ft_min(128, fdf->map->zoom + 2);
 	if (count)
 		ft_render(fdf);
 	return (1);
@@ -106,6 +106,14 @@ int		ft_handle_keypress(int key, t_fdf *fdf)
 		fdf->map->heightmult--;
 	else if (key == PL_KEY)
 		fdf->map->heightmult++;
+	else if (key == K1_KEY)
+		fdf->map->renderer = ft_draw_map;
+	else if (key == K2_KEY)
+		fdf->map->renderer = ft_point_map;
+	else if (key == K3_KEY)
+		fdf->map->renderer = ft_draw_map_pov;
+	else
+		return (1);
 	ft_render(fdf);
 	return (1);
 }

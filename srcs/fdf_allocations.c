@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:41:14 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 22:30:15 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_image		*ft_new_image(t_fdf *fdf, int width, int height)
 		ft_exit("Could not allocate enough memory");
 	img->data = mlx_get_data_addr(img->img_ptr,
 			&(img->bpp), &(img->size_line), &(img->endian));
+	if (!(img->points = malloc(sizeof(int) * (width * height))))
+		ft_exit("Could not allocate enough memory");
 	img->bpp /= 8;
 	img->width = width;
 	img->height = height;
@@ -70,6 +72,7 @@ t_map		*ft_new_map(void)
 
 	if (!(map = malloc(sizeof(t_map))))
 		return (NULL);
+	map->renderer = &ft_draw_map;
 	map->points = NULL;
 	map->image = NULL;
 	map->maxheight = 0;

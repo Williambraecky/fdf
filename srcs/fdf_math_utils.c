@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_utils.c                                        :+:      :+:    :+:   */
+/*   fdf_math_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/22 16:25:32 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 22:55:27 by wbraeckm         ###   ########.fr       */
+/*   Created: 2018/09/01 22:13:43 by wbraeckm          #+#    #+#             */
+/*   Updated: 2018/09/02 00:05:25 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_vector3d	ft_asvector2d(float x, float y)
+float	ft_todegrees(float rad)
 {
-	return (ft_asvector3d(x, y, 0));
+	return (rad * 180 / M_PI);
 }
 
-t_vector3d	ft_asvector3d(float x, float y, float z)
+float	ft_toradians(float degree)
 {
-	t_vector3d res;
-
-	res.x = x;
-	res.y = y;
-	res.z = z;
-	return (res);
+	return (degree * M_PI / 180);
 }
 
-void		ft_destroy_image(t_fdf *fdf, t_image *image)
+float		ft_get_anglez(t_vector3d from, t_vector3d to)
 {
-	image->width = 0;
-	image->height = 0;
-	free(image->points);
-	mlx_destroy_image(fdf->mlx_ptr, image->img_ptr);
-	free(image);
+	return (atan2((to.x - from.x), (to.z - from.z)));
+}
+
+float		ft_get_angley(t_vector3d from, t_vector3d to)
+{
+	return (atan2((to.y - from.y), (to.z - from.z)));
+}
+
+int			ft_isinpov(t_vector3d p, t_vector3d eye)
+{
+	(void)eye;
+	if (p.z < 0)
+		return (0);
+	return (1);
 }

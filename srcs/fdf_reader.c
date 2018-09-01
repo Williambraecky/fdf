@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:14:19 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 15:41:25 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 21:44:51 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_read_map(int fd, t_fdf *fdf)
 	}
 	fdf->map->height = ft_lstlen(list);
 	if (fdf->map->height == 0)
-		ft_exit("Invalid file");
+		ft_exit("Invalid file 1");
 	fdf->map->offsetx = (float)(fdf->map->width - 1) / 2.0;
 	fdf->map->offsety = (float)(fdf->map->height - 1) / 2.0;
 	ft_convert_list(fdf, list);

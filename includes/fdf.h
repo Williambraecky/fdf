@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 17:47:22 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 22:59:21 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define TRANSPARENT -16777216
 # define COLOR_RED 0xFF0000
 # define COLOR_WHITE 0xFFFFFF
+# define SINX 0
+# define COSX 1
+# define SINY 2
+# define COSY 3
 
 typedef struct s_color	t_color;
 struct			s_color
@@ -39,12 +43,14 @@ struct			s_color
 	int			b;
 };
 
+/*
 typedef struct s_vector2d	t_vector2d;
 struct			s_vector2d
 {
 	float		x;
 	float		y;
 };
+*/
 
 typedef struct s_vector3d	t_vector3d;
 struct			s_vector3d
@@ -74,6 +80,7 @@ struct			s_image
 {
 	void		*img_ptr;
 	char		*data;
+	int			*points;
 	int			bpp;
 	int			size_line;
 	int			endian;
@@ -87,6 +94,7 @@ struct			s_map
 	t_point		**data;
 	t_vector3d	**points;
 	t_image		*image;
+	void		(*renderer)(t_map *map);
 	ssize_t		width;
 	ssize_t		height;
 	int			maxheight;
@@ -151,6 +159,9 @@ struct			s_fdf
 */
 
 void			ft_render(t_fdf *fdf);
+void			ft_draw_map(t_map *map);
+void			ft_point_map(t_map *map);
+void			ft_draw_map_pov(t_map *map);
 
 /*
 ** Parsing funcitons
@@ -163,12 +174,15 @@ t_fdf			*ft_read_file(char *file);
 */
 
 float			ft_toradians(float degree);
-t_vector3d		ft_rotatez(t_vector3d point, float angle, t_vector3d around);
+float			ft_todegrees(float rad);
+t_vector3d		ft_rotateaccordingly(t_vector3d vec, float trigo[],
+		t_vector3d around);
 t_vector3d		ft_rotatey(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_rotatex(t_vector3d point, float angle, t_vector3d around);
-t_vector2d		ft_to2dvector(t_vector3d p, t_vector3d eye);
+t_vector3d		ft_to2dvector(t_vector3d p, t_vector3d eye);
 float			ft_get_anglez(t_vector3d from, t_vector3d to);
 float			ft_get_angley(t_vector3d from, t_vector3d to);
+int				ft_isinpov(t_vector3d p, t_vector3d eye);
 
 /*
 ** Utilitaries
@@ -181,7 +195,7 @@ t_image			*ft_new_image(t_fdf *fdf, int width, int height);
 void			ft_destroy_image(t_fdf *fdf, t_image *image);
 t_menu			*ft_new_menu(t_fdf *fdf);
 t_control		*ft_new_control(void);
-t_vector2d		ft_asvector2d(float x, float y);
+t_vector3d		ft_asvector2d(float x, float y);
 t_vector3d		ft_asvector3d(float x, float y, float z);
 
 /*
@@ -205,14 +219,18 @@ int				ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf);
 */
 
 void			ft_img_put_pixel(t_image *image, int x, int y, int color);
-void			ft_draw_square(t_image *image, t_vector2d start, t_vector2d end,
+void			ft_map_put_pixel(t_image *image, t_vector3d p, int color);
+void			ft_draw_square(t_image *image, t_vector3d start, t_vector3d end,
 		int color);
-void			ft_draw_line(t_image *image, t_vector2d first,
-		t_vector2d second, int color);
-void			ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
+void			ft_draw_line(t_image *image, t_vector3d first,
+		t_vector3d second, int color);
+void			ft_draw_edges(t_image *image, t_vector3d start, t_vector3d end,
 		int color);
 void			ft_draw_line_gradient(t_image *image, t_vector3d first,
 		t_vector3d second, t_col_p col_p);
+void			ft_draw_line_gradient_pov(t_image *image, t_vector3d first,
+		t_vector3d second, t_col_p col_p, t_vector3d eye);
+int				ft_should_draw_line(t_image *image, t_vector3d f, t_vector3d s);
 
 /*
 ** Color
@@ -240,6 +258,6 @@ void			ft_put_rgb_target(t_menu *menu);
 */
 
 void			ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
-		t_vector2d pos);
+		t_vector3d pos);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 12:12:34 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 12:38:15 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 22:20:55 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_xpm_get_color(t_xpm *xpm, int x, int y)
 }
 
 void	ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
-		t_vector2d pos)
+		t_vector3d pos)
 {
 	t_xpm	*xpm;
 	int		x;
