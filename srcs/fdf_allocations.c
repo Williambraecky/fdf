@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 16:16:21 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 17:09:50 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_menu		*ft_new_menu(t_fdf *fdf)
 	menu->img = ft_new_image(fdf, MENU_WIDTH, WIN_HEIGHT);
 	menu->enabled = 0;
 	menu->red = 0;
-	menu->start_color = ft_int_to_color(COLOR_RED);
+	menu->start_color = ft_int_to_color(COLOR_WHITE);
 	menu->end_color = ft_int_to_color(COLOR_RED);
 	return (menu);
 }
