@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 16:21:52 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 16:59:18 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ int		ft_handle_button_movement(int x, int y, t_fdf *fdf)
 	int dx;
 	int dy;
 
-	count = 0;
 	dx = fdf->controls->last_x - x;
 	dy = fdf->controls->last_y - y;
 	fdf->controls->last_x = x;
 	fdf->controls->last_y = y;
 	ft_handle_r_press(x, y, fdf);
-	count += ft_handle_rgb_press(x, y, fdf);
+	count = ft_handle_rgb_press(x, y, fdf) ? 1 : 0;
 	if (!fdf->controls->inside_menu && fdf->controls->mouse & (1L << BUT1_KEY))
 	{
 		count++;
@@ -65,9 +64,8 @@ int		ft_handle_button_movement(int x, int y, t_fdf *fdf)
 		fdf->map->y_rot += (float)dx / 5;
 	}
 	else if (!fdf->controls->inside_menu &&
-			fdf->controls->mouse & (1L << BUT2_KEY))
+			fdf->controls->mouse & (1L << BUT2_KEY) && ++count)
 	{
-		count++;
 		fdf->map->x_off += -((float)dx / 2);
 		fdf->map->y_off += -((float)dy / 2);
 	}
@@ -80,6 +78,8 @@ int		ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf)
 {
 	int count;
 
+	if (x < 0 || y < 0)
+		return (1);
 	count = 0;
 	if (fdf->controls->mouse == 0)
 		fdf->controls->inside_menu = fdf->menu->enabled && x < MENU_WIDTH;
