@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:25:32 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 11:24:43 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 15:44:51 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ float		ft_get_anglez(t_vector3d from, t_vector3d to)
 float		ft_get_angley(t_vector3d from, t_vector3d to)
 {
 	return (atan((to.z - from.z) / (to.x - from.x)));
+}
+
+void		ft_destroy_image(t_fdf *fdf, t_image *image)
+{
+	image->width = 0;
+	image->height = 0;
+	mlx_destroy_image(fdf->mlx_ptr, image->img_ptr);
+	free(image);
 }

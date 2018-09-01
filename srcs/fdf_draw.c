@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:03:58 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 16:30:28 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 15:45:52 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	ft_draw_line_gradient(t_image *image, t_vector3d first, t_vector3d second,
 		t_color start, t_color end)
 {
 	t_vector3d	d;
-	float	step;
-	int		i;
+	float		step;
+	int			i;
 
 	if ((first.x < 0 && second.x < 0) ||
 			(first.x >= image->width && second.x >= image->width) ||

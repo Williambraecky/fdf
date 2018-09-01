@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 16:27:02 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 16:15:54 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ struct			s_vector3d
 	float		z;
 };
 
-typedef struct t_point	t_point;
-struct			t_point
+typedef struct s_point	t_point;
+struct			s_point
 {
 	int			height;
 	int			forced_color;
@@ -90,7 +90,9 @@ struct			s_map
 	t_vector3d	eye;
 	t_vector3d	rotating;
 	float		x_rot;
+	float		x_off;
 	float		y_rot;
+	float		y_off;
 };
 
 typedef struct s_menu	t_menu;
@@ -101,6 +103,17 @@ struct			s_menu
 	t_color		start_color;
 	t_color		end_color;
 	t_image		*img;
+};
+
+typedef struct s_control	t_control;
+struct			s_control
+{
+	int			mouse;
+	int			inside_menu;
+	int			last_x;
+	int			x;
+	int			last_y;
+	int			y;
 };
 
 typedef struct s_xpm	t_xpm;
@@ -123,6 +136,7 @@ struct			s_fdf
 	t_map		*map;
 	int			menu_enabled;
 	t_menu		*menu;
+	t_control	*controls;
 };
 
 /*
@@ -159,6 +173,7 @@ t_map			*ft_new_map(void);
 t_image			*ft_new_image(t_fdf *fdf, int width, int height);
 void			ft_destroy_image(t_fdf *fdf, t_image *image);
 t_menu			*ft_new_menu(t_fdf *fdf);
+t_control		*ft_new_control(void);
 t_vector2d		ft_asvector2d(float x, float y);
 t_vector3d		ft_asvector3d(float x, float y, float z);
 
@@ -175,8 +190,8 @@ t_point			ft_read_point(char *str);
 */
 
 int				ft_handle_keypress(int key, t_fdf *fdf);
-int				ft_handle_mousepress(int button, int x, int y, t_fdf *fdf);
 int				ft_handle_button_movement(int x, int y, t_fdf *fdf);
+int				ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf);
 
 /*
 ** Drawing
@@ -189,8 +204,8 @@ void			ft_draw_line(t_image *image, t_vector2d first,
 		t_vector2d second, int color);
 void			ft_draw_edges(t_image *image, t_vector2d start, t_vector2d end,
 		int color);
-void	ft_draw_line_gradient(t_image *image, t_vector3d first, t_vector3d second,
-		t_color start, t_color end);
+void			ft_draw_line_gradient(t_image *image, t_vector3d first,
+		t_vector3d second, t_color start, t_color end);
 
 /*
 ** Color
@@ -215,7 +230,7 @@ void			ft_put_rgb_target(t_menu *menu);
 ** Xpm utils
 */
 
-void	ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
+void			ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
 		t_vector2d pos);
 
 #endif

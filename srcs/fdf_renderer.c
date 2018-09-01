@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 16:25:36 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 16:17:16 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_genpoint(t_map *map, t_menu *menu)
 		while (x < map->width)
 		{
 			map->points[y][x] = ft_asvector3d(
-					(x - map->offsetx) * map->zoom + map->image->width / 2,
-					(y - map->offsety) * map->zoom + map->image->height / 2,
+					(x - map->offsetx) * map->zoom + map->image->width / 2 + map->x_off,
+					(y - map->offsety) * map->zoom + map->image->height / 2 + map->y_off,
 					1000 + (map->data[y][x].height * map->heightmult * map->zoom));
 			map->points[y][x] = ft_rotatex(map->points[y][x],
 					map->x_rot, map->rotating);
@@ -88,8 +88,8 @@ void	ft_render(t_fdf *fdf)
 		ft_destroy_image(fdf, fdf->map->image);
 	fdf->map->image = ft_new_image(fdf,
 			fdf->menu->enabled ? WIN_WIDTH - MENU_WIDTH : WIN_WIDTH, WIN_HEIGHT);
-	fdf->map->rotating = ft_asvector3d(fdf->map->image->width / 2,
-			fdf->map->image->height / 2,
+	fdf->map->rotating = ft_asvector3d(fdf->map->image->width / 2 + fdf->map->x_off,
+			fdf->map->image->height / 2 + fdf->map->y_off,
 			1000 + (fdf->map->maxheight - fdf->map->minheight) * fdf->map->heightmult * fdf->map->zoom / 2);
 	fdf->map->eye = ft_asvector3d(fdf->map->image->width / 2,
 			fdf->map->image->height / 2,

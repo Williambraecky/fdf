@@ -6,36 +6,37 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/29 16:27:14 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/01 16:16:21 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-void	ft_destroy_image(t_fdf *fdf, t_image *image)
+t_control	*ft_new_control(void)
 {
-	image->width = 0;
-	image->height = 0;
-	mlx_destroy_image(fdf->mlx_ptr, image->img_ptr);
-	free(image);
+	t_control	*control;
+
+	if (!(control = ft_memalloc(sizeof(t_control))))
+		return (NULL);
+	return (control);
 }
 
-t_menu	*ft_new_menu(t_fdf *fdf)
+t_menu		*ft_new_menu(t_fdf *fdf)
 {
 	t_menu	*menu;
 
 	if (!(menu = malloc(sizeof(t_menu))))
 		return (NULL);
 	menu->img = ft_new_image(fdf, MENU_WIDTH, WIN_HEIGHT);
-	menu->enabled = 1;
+	menu->enabled = 0;
 	menu->red = 0;
 	menu->start_color = ft_int_to_color(COLOR_RED);
 	menu->end_color = ft_int_to_color(COLOR_RED);
 	return (menu);
 }
 
-t_image	*ft_new_image(t_fdf *fdf, int width, int height)
+t_image		*ft_new_image(t_fdf *fdf, int width, int height)
 {
 	t_image		*img;
 
@@ -52,17 +53,19 @@ t_image	*ft_new_image(t_fdf *fdf, int width, int height)
 	return (img);
 }
 
-t_fdf	*ft_new_fdf(void)
+t_fdf		*ft_new_fdf(void)
 {
 	t_fdf	*fdf;
 
 	if (!(fdf = malloc(sizeof(t_fdf))))
 		return (NULL);
+	if (!(fdf->controls = ft_new_control()))
+		ft_exit("Could not alloacte enough memory");
 	fdf->menu_enabled = 1;
 	return (fdf);
 }
 
-t_map	*ft_new_map(void)
+t_map		*ft_new_map(void)
 {
 	t_map	*map;
 
@@ -76,6 +79,8 @@ t_map	*ft_new_map(void)
 	map->width = -1;
 	map->height = -1;
 	map->x_rot = 10;
-	map->y_rot = 0;
+	map->y_rot = 10;
+	map->x_off = 0;
+	map->y_off = 0;
 	return (map);
 }
