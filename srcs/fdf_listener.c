@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 23:34:55 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/02 01:55:48 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int		ft_handle_keypress(int key, t_fdf *fdf)
 	else if (key == M_KEY)
 		fdf->menu->enabled ^= 1;
 	else if (key == MN_KEY)
-		fdf->map->heightmult--;
+		fdf->map->heightmult -= 0.2;
 	else if (key == PL_KEY)
-		fdf->map->heightmult++;
+		fdf->map->heightmult += 0.2;
 	else if (key == K1_KEY)
 		fdf->map->renderer = ft_draw_map;
 	else if (key == K2_KEY)

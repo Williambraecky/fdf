@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 22:59:21 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/02 01:51:55 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ struct			s_color
 	int			g;
 	int			b;
 };
-
-/*
-typedef struct s_vector2d	t_vector2d;
-struct			s_vector2d
-{
-	float		x;
-	float		y;
-};
-*/
 
 typedef struct s_vector3d	t_vector3d;
 struct			s_vector3d
@@ -102,7 +93,7 @@ struct			s_map
 	float		offsetx;
 	float		offsety;
 	int			zoom;
-	int			heightmult;
+	float		heightmult;
 	t_vector3d	eye;
 	t_vector3d	rotating;
 	float		x_rot;
