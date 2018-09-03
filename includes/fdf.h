@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/02 01:51:55 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/03 14:41:11 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 # include <fcntl.h>
 # include "mlx.h"
-# include <stdio.h>
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
@@ -171,9 +170,8 @@ t_vector3d		ft_rotateaccordingly(t_vector3d vec, float trigo[],
 t_vector3d		ft_rotatey(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_rotatex(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_to2dvector(t_vector3d p, t_vector3d eye);
-float			ft_get_anglez(t_vector3d from, t_vector3d to);
-float			ft_get_angley(t_vector3d from, t_vector3d to);
-int				ft_isinpov(t_vector3d p, t_vector3d eye);
+void	ft_vec3d_add(t_vector3d *vec, float x, float y, float z);
+int				ft_isinpov(t_vector3d p);
 
 /*
 ** Utilitaries
@@ -220,7 +218,7 @@ void			ft_draw_edges(t_image *image, t_vector3d start, t_vector3d end,
 void			ft_draw_line_gradient(t_image *image, t_vector3d first,
 		t_vector3d second, t_col_p col_p);
 void			ft_draw_line_gradient_pov(t_image *image, t_vector3d first,
-		t_vector3d second, t_col_p col_p, t_vector3d eye);
+		t_vector3d second, t_col_p col_p);
 int				ft_should_draw_line(t_image *image, t_vector3d f, t_vector3d s);
 
 /*
