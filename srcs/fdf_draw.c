@@ -6,12 +6,11 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:03:58 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 22:47:35 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:03:12 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	ft_img_put_pixel(t_image *image, int x, int y, int color)
 {

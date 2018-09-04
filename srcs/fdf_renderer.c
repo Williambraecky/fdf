@@ -6,17 +6,15 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/03 15:48:43 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:10:52 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void		ft_fill_trigo(t_map *map, float *trigo)
 {
 	trigo[SINX] = sin(ft_toradians(map->x_rot));
-	printf("%f  ", trigo[SINX]);
 	trigo[COSX] = cos(ft_toradians(map->x_rot));
 	trigo[SINY] = sin(ft_toradians(map->y_rot));
 	trigo[COSY] = cos(ft_toradians(map->y_rot));
@@ -41,7 +39,6 @@ void		ft_genpoint(t_map *map, t_menu *menu)
 	float	trigo[4];
 
 	ft_fill_trigo(map, trigo);
-	printf("%f\n", trigo[SINX]);
 	y = 0;
 	while (y < map->height)
 	{
@@ -62,7 +59,7 @@ void		ft_genpoint(t_map *map, t_menu *menu)
 	}
 }
 
-void	ft_allocpoints(t_map *map)
+void		ft_allocpoints(t_map *map)
 {
 	int y;
 
@@ -74,7 +71,7 @@ void	ft_allocpoints(t_map *map)
 			ft_exit("Could not allocate enough memory");
 }
 
-void	ft_render(t_fdf *fdf)
+void		ft_render(t_fdf *fdf)
 {
 	if (fdf->map->image != NULL)
 		ft_destroy_image(fdf, fdf->map->image);

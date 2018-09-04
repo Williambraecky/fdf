@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:15:12 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/17 12:16:02 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:15:24 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 size_t	ft_splitlen(char **split)
 {
-	size_t i = 0;
+	size_t i;
 
+	i = 0;
 	while (split[i])
 		i++;
 	return (i);

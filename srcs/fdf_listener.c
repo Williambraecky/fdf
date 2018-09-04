@@ -6,12 +6,11 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/03 14:42:10 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:03:31 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 int		ft_handle_r_press(int x, int y, t_fdf *fdf)
 {

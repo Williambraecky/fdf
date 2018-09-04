@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/03 14:41:11 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:14:44 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ t_vector3d		ft_rotateaccordingly(t_vector3d vec, float trigo[],
 t_vector3d		ft_rotatey(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_rotatex(t_vector3d point, float angle, t_vector3d around);
 t_vector3d		ft_to2dvector(t_vector3d p, t_vector3d eye);
-void	ft_vec3d_add(t_vector3d *vec, float x, float y, float z);
+void			ft_vec3d_add(t_vector3d *vec, float x, float y, float z);
 int				ft_isinpov(t_vector3d p);
 
 /*
