@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 16:36:14 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/03 14:35:03 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 17:32:01 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_menu		*ft_new_menu(t_fdf *fdf)
 
 	if (!(menu = malloc(sizeof(t_menu))))
 		return (NULL);
+	menu->corrupted = 0;
 	menu->img = ft_new_image(fdf, MENU_WIDTH, WIN_HEIGHT);
 	menu->enabled = 1;
 	menu->red = 0;

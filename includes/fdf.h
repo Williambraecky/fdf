@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/04 11:14:44 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 17:28:14 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_menu	t_menu;
 struct			s_menu
 {
 	int			enabled;
+	int			corrupted;
 	int			red;
 	t_color		start_color;
 	t_color		end_color;
@@ -248,5 +249,11 @@ void			ft_put_rgb_target(t_menu *menu);
 
 void			ft_put_xpm_file_to_image(t_fdf *fdf, char *file, t_image *image,
 		t_vector3d pos);
+
+/*
+** Corrupt
+*/
+
+void			ft_handle_corruption(int x, int y, t_fdf *fdf);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/04 11:03:31 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/04 17:28:44 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf)
 		fdf->controls->inside_menu = fdf->menu->enabled && x < MENU_WIDTH;
 	if (button == BUT1_KEY || button == BUT2_KEY || button == BUT3_KEY)
 		fdf->controls->mouse ^= (1L << button);
+	ft_handle_corruption(x, y, fdf);
 	count += ft_handle_r_press(x, y, fdf);
 	count += ft_handle_rgb_press(x, y, fdf);
 	if (!fdf->controls->inside_menu && button == SCROLLDOWN_KEY && ++count)
