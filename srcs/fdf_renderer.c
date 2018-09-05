@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:45:22 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/04 11:10:52 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/05 11:00:01 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ void		ft_allocpoints(t_map *map)
 
 void		ft_render(t_fdf *fdf)
 {
-	if (fdf->map->image != NULL)
-		ft_destroy_image(fdf, fdf->map->image);
-	fdf->map->image = ft_new_image(fdf,
-		fdf->menu->enabled ? WIN_WIDTH - MENU_WIDTH : WIN_WIDTH, WIN_HEIGHT);
+	ft_check_map_image(fdf, fdf->map);
 	fdf->map->rotating = ft_asvector3d(
 		fdf->map->image->width / 2 + fdf->map->x_off,
 		fdf->map->image->height / 2 + fdf->map->y_off,

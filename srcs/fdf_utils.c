@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 16:25:32 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/01 22:55:27 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/05 10:59:11 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,20 @@ void		ft_destroy_image(t_fdf *fdf, t_image *image)
 	free(image->points);
 	mlx_destroy_image(fdf->mlx_ptr, image->img_ptr);
 	free(image);
+}
+
+void		ft_check_map_image(t_fdf *fdf, t_map *map)
+{
+	int	width;
+
+	width = fdf->menu->enabled ? WIN_WIDTH - MENU_WIDTH : WIN_WIDTH;
+	if (map->image == NULL || map->image->width != width)
+	{
+		if (map->image != NULL)
+			ft_destroy_image(fdf, map->image);
+		map->image = ft_new_image(fdf, width, WIN_HEIGHT);
+	}
+	else
+		ft_memset(map->image->data, 0,
+				map->image->width * map->image->height * map->image->bpp);
 }
