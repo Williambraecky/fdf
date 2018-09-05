@@ -6,7 +6,7 @@
 #    By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:04:36 by wbraeckm          #+#    #+#              #
-#    Updated: 2018/08/24 14:06:01 by wbraeckm         ###   ########.fr        #
+#    Updated: 2018/09/05 11:29:29 by wbraeckm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CC = gcc
 FLAGS = -O3 -Wall -Wextra -Werror
 INCLUDES = includes/
 LIB_INCLUDES = libft/includes/
+LIB_FOLDER = libft/
 MLX_FOLDER = minilibx/
 SRCSFOLDER = srcs
 OBJFOLDER = obj
@@ -32,7 +33,7 @@ ccred = "\033[0;91m"
 ccgreen = "\033[0;92m"
 ccmagenta = "\033[0;96m"
 
-all: $(NAME)
+all: $(LIBFT) $(MLX) $(NAME)
 
 $(OBJFOLDER)/%.o:$(SRCSFOLDER)/%.c
 	@printf $(ccgreen)
@@ -41,35 +42,36 @@ $(OBJFOLDER)/%.o:$(SRCSFOLDER)/%.c
 $(OBJSUBS):
 	@mkdir $@
 
-$(NAME): lib mlx $(OBJSUBS) $(OBJ)
+$(NAME): $(OBJSUBS) $(OBJ)
 	@printf $(ccmagenta)
-	@make compile
-
-compile:
 	gcc $(FLAGS) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX)
 
 clean:
 	@printf $(ccred)
+	make clean -C $(LIB_FOLDER)
+	make clean -C $(MLX_FOLDER)
 	/bin/rm -rf obj/
 
 fclean: clean
+	make fclean -C $(LIB_FOLDER)
+	rm -f $(MLX)
 	/bin/rm -f $(NAME)
 
-re: re-lib re-mlx fclean all
+re: fclean all
 
 norm:
-	@norminette srcs/ includes/
+	@norminette srcs/ includes/ $(LIB_FOLDER)srcs $(LIB_INCLUDES)
 
 re-mlx:
-	@make re -C minilibx/
+	make re -C $(MLX_FOLDER)
 
 re-lib:
-	@make re -C libft/
+	make re -C $(LIB_FOLDER)
 
-mlx:
-	@make -C minilibx/
+$(MLX):
+	make -C $(MLX_FOLDER)
 
-lib:
-	@make -C libft/
+$(LIBFT):
+	make -C $(LIB_FOLDER)
 
-.PHONY: norm clean fclean re lib mlx
+.PHONY: norm clean fclean re
