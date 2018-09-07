@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 15:12:24 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/07 17:08:10 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/07 17:22:37 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	ft_free_fdf_exit(t_fdf *fdf)
 	ft_free_menu(fdf, fdf->menu);
 	ft_free_map(fdf, fdf->map);
 	mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
-	free(fdf->mlx_ptr);
 	free(fdf);
 	exit(0);
 }
