@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 15:55:31 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/04 17:28:44 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/07 15:23:11 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		ft_handle_mouseclicks(int button, int x, int y, t_fdf *fdf)
 int		ft_handle_keypress(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
-		exit(0);
+		ft_free_fdf_exit(fdf);
 	else if (key == M_KEY)
 		fdf->menu->enabled ^= 1;
 	else if (key == MN_KEY)

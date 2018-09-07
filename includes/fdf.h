@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/05 11:00:08 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/07 15:22:53 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ t_control		*ft_new_control(void);
 t_vector3d		ft_asvector2d(float x, float y);
 t_vector3d		ft_asvector3d(float x, float y, float z);
 void			ft_check_map_image(t_fdf *fdf, t_map *map);
+void			ft_free_fdf_exit(t_fdf *fdf);
 
 /*
 ** Parsing
