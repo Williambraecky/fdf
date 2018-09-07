@@ -6,13 +6,13 @@
 #    By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:04:36 by wbraeckm          #+#    #+#              #
-#    Updated: 2018/09/07 16:58:34 by wbraeckm         ###   ########.fr        #
+#    Updated: 2018/09/07 17:07:04 by wbraeckm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
-FLAGS = -O3 -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 INCLUDES = includes/
 LIB_INCLUDES = libft/includes/
 LIB_FOLDER = libft/
