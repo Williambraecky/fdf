@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:13:37 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/07 15:22:53 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/10 11:34:22 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,7 @@ struct			s_control
 	int			mouse;
 	int			inside_menu;
 	int			last_x;
-	int			x;
 	int			last_y;
-	int			y;
 };
 
 typedef struct s_xpm	t_xpm;
