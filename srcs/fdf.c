@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:18:46 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/09/07 16:58:11 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:29:15 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			main(int argc, char *argv[])
 	t_fdf	*fdf;
 	char	*str;
 
-	if (argc == 0)
+	if (argc == 1)
 		ft_exit("Not enough arguments");
 	fdf = ft_read_file(argv[1]);
 	fdf->mlx_ptr = mlx_init();

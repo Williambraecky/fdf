@@ -6,7 +6,7 @@
 /*   By: wbraeckm <wbraeckm@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/24 16:14:56 by wbraeckm          #+#    #+#             */
-/*   Updated: 2018/08/24 16:16:02 by wbraeckm         ###   ########.fr       */
+/*   Updated: 2018/09/12 11:31:29 by wbraeckm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ float	ft_ilerp(float start, float end, float target)
 		return (0.00);
 	else if (target == end)
 		return (1.00);
-	return (target / (end - start));
+	return ((target - start) / (end - start));
 }
