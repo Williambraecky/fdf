@@ -9,6 +9,8 @@ Fdf (fil de fer) is the first graphical project at my school.
 It is fairly simple, you have to read a file containing some points height (and optionally colors)(the points x and y are it's position in the file)
 and make a graphical representation by connecting the dots basically.
 
+![alt text](https://raw.githubusercontent.com/Williambraecky/fdf/master/img/render_example.png)
+
 # How did I do it?
 
 First step is to parse the file:
